@@ -1,1 +1,14 @@
-fastapi[all]
+fastapi
+uvicorn
+pydantic
+requests
+serpapi
+google_search_results
+gunicorn
+google-generativeai
+openai
+spacy
+rapidfuzz
+google-search-results
+gliner-spacy
+
