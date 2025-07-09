@@ -1,8 +1,8 @@
 from serpapi.google_search import GoogleSearch
 import google.generativeai as genai
 from openai import OpenAI
-from rapidfuzz import fuzz
-import spacy
+#from rapidfuzz import fuzz
+#import spacy
 import json
 import re
 
@@ -81,62 +81,62 @@ def execute_search(query):
     return ['empty']
 
 
-nlp = spacy.blank('en')
-nlp.add_pipe('gliner_spacy')
+#nlp = spacy.blank('en')
+#nlp.add_pipe('gliner_spacy')
 
 
-def extract_person_names_list(profiles):
-    extracted = []
-    for idx, profile in enumerate(profiles):
-        if not isinstance(profile, dict):
-            continue  
-        if 'title' not in profile:
-            continue  
+#def extract_person_names_list(profiles):
+ #   extracted = []
+  #  for idx, profile in enumerate(profiles):
+   #     if not isinstance(profile, dict):
+    #        continue
+     #   if 'title' not in profile:
+      #      continue
 
-        doc = nlp(profile['title'])
-        name = None
-        for ent in doc.ents:
-            if ent.label_.lower() == "person":
-                name = ent.text.strip()
-                break
-        extracted.append((idx, name))
-    return extracted
+       # doc = nlp(profile['title'])
+       # name = None
+       # for ent in doc.ents:
+       #     if ent.label_.lower() == "person":
+       #         name = ent.text.strip()
+       #         break
+       # extracted.append((idx, name))
+    #return extracted
 
 
-def match_profiles_by_extracted_names(linkedin_list, researchgate_list, threshold=95):
-    linkedin_names = extract_person_names_list(linkedin_list)
-    researchgate_names = extract_person_names_list(researchgate_list)
+#def match_profiles_by_extracted_names(linkedin_list, researchgate_list, threshold=95):
+    #linkedin_names = extract_person_names_list(linkedin_list)
+    #researchgate_names = extract_person_names_list(researchgate_list)
 
-    matches = []
-    used_rg = set()
+    #matches = []
+    #used_rg = set()
 
-    for li_idx, li_name in linkedin_names:
-        if not li_name:
-            continue
+    #for li_idx, li_name in linkedin_names:
+     #   if not li_name:
+      #      continue
 
-        best_match = None
-        best_score = 0
+      #  best_match = None
+      #  best_score = 0
 
-        for rg_idx, rg_name in researchgate_names:
-            if rg_idx in used_rg or not rg_name:
-                continue
+      #  for rg_idx, rg_name in researchgate_names:
+      #      if rg_idx in used_rg or not rg_name:
+      #          continue
 
-            score = fuzz.ratio(li_name.lower(), rg_name.lower())
+      #      score = fuzz.ratio(li_name.lower(), rg_name.lower())
 
-            if score > best_score:
-                best_score = score
-                best_match = rg_idx
+      #      if score > best_score:
+      #          best_score = score
+      #          best_match = rg_idx
 
-        if best_score >= threshold and best_match is not None:
-            matches.append({
-                "name": li_name,
-                "linkedin": linkedin_list[li_idx],
-                "researchgate": researchgate_list[best_match],
-                "match_score": best_score
-            })
-            used_rg.add(best_match)
+      #  if best_score >= threshold and best_match is not None:
+      #      matches.append({
+      #          "name": li_name,
+      #          "linkedin": linkedin_list[li_idx],
+      #          "researchgate": researchgate_list[best_match],
+      #          "match_score": best_score
+      #      })
+      #      used_rg.add(best_match)
 
-    return matches
+   # return matches
 
 
 
