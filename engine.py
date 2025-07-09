@@ -9,7 +9,7 @@ import re
 client = genai.GenerativeModel('gemini-1.5-flash')
 
 params = {
-  "api_key": "421334e876305657e95548c552665122ad61b5cf3743d3969fce5f366e1d04a5",
+  "api_key": "c89c60c5b258294355be4b089813ae5b34f593bb76a37c293bb3d905a12ec568",
   "engine": "google",
   "start": "0",
   "q": 'rohan raval ucsd site:linkedin.com/in',  
