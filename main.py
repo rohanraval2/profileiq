@@ -14,6 +14,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "ProfileIQ API running"}
+
+@app.get("/health")
+def health():
+    return {"ok": True}
+
 class QueryRequest(BaseModel):
     query: str
 
